@@ -13,7 +13,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" android:layout_gravity="bottom|center">
 		<view
-		class = "net.schwiz.wolfram.full.walauncher$MyEditView"
+		class = "net.schwiz.wolfram.full.WAlauncher$MyEditView"
 		android:id="@+id/inputID" 
 		android:text="" 
 		android:layout_width="fill_parent" 

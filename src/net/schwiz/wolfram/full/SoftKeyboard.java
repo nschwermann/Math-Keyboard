@@ -198,7 +198,7 @@ public class SoftKeyboard extends InputMethodService
             default:
                 // For all unknown input types, default to the alphabetic
                 // keyboard with no special features.
-                mCurKeyboard = mSymbolsKeyboard;
+                mCurKeyboard = mQwertyKeyboard;
                 mPredictionOn = false;
                 updateShiftKeyState(attribute);
         }
@@ -676,6 +676,12 @@ public class SoftKeyboard extends InputMethodService
         }
         else if(primaryCode == getResources().getInteger(R.dimen.lim)){
         	getCurrentInputConnection().commitText("lim x->", 1);
+        }
+        else if(primaryCode == 21){
+        	getCurrentInputConnection().sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN,KeyEvent.KEYCODE_DPAD_LEFT));
+        }
+        else if(primaryCode == 22){
+        	getCurrentInputConnection().sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN,KeyEvent.KEYCODE_DPAD_RIGHT));
         }
         else {
             getCurrentInputConnection().commitText(

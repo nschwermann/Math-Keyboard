@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<searchable
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:label="WolframAlpha instant search"
-  android:searchSettingsDescription="query WolframAlpha and display results instantly in your browser."
-  android:includeInGlobalSearch="true"
-  android:searchSuggestAuthority="net.schwiz.wolfram.full.WolframQucklaunchProvider"
-  android:searchSuggestIntentAction="android.intent.action.VIEW">  
-</searchable>

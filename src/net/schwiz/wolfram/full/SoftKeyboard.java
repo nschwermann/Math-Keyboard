@@ -198,7 +198,7 @@ public class SoftKeyboard extends InputMethodService
             default:
                 // For all unknown input types, default to the alphabetic
                 // keyboard with no special features.
-                mCurKeyboard = mSymbolsKeyboard;
+                mCurKeyboard = mQwertyKeyboard;
                 mPredictionOn = false;
                 updateShiftKeyState(attribute);
         }
@@ -516,12 +516,14 @@ public class SoftKeyboard extends InputMethodService
 		if (current == mSymbolsKeyboard || current == mSymbolsShiftedKeyboard) {
 		    current = mQwertyKeyboard;
 		} else {
-		    current = mSymbolsKeyboard;
+			current = mSymbolsKeyboard;
+			if(current.isShifted())
+				current=mSymbolsShiftedKeyboard;
 		}
 		mInputView.setKeyboard(current);
-		if (current == mSymbolsKeyboard) {
-		    current.setShifted(false);
-		}
+//		if (current == mSymbolsKeyboard) {
+//		    current.setShifted(false);
+//		}
 	}
 
     public void onText(CharSequence text) {
@@ -585,18 +587,18 @@ public class SoftKeyboard extends InputMethodService
         if (mInputView == null) {
             return;
         }
-        
+        checkToggleCapsLock();
         Keyboard currentKeyboard = mInputView.getKeyboard();
         if (mQwertyKeyboard == currentKeyboard) {
             // Alphabet keyboard
-            checkToggleCapsLock();
+            
             mInputView.setShifted(mCapsLock || !mInputView.isShifted());
         } else if (currentKeyboard == mSymbolsKeyboard) {
-            mSymbolsKeyboard.setShifted(true);
+//            mSymbolsKeyboard.setShifted(true);
             mInputView.setKeyboard(mSymbolsShiftedKeyboard);
             mSymbolsShiftedKeyboard.setShifted(true);
-        } else if (currentKeyboard == mSymbolsShiftedKeyboard) {
-            mSymbolsShiftedKeyboard.setShifted(false);
+        } else if (currentKeyboard == mSymbolsShiftedKeyboard && !mCapsLock) {
+//            mSymbolsShiftedKeyboard.setShifted(false);
             mInputView.setKeyboard(mSymbolsKeyboard);
             mSymbolsKeyboard.setShifted(false);
         }
@@ -677,10 +679,27 @@ public class SoftKeyboard extends InputMethodService
         else if(primaryCode == getResources().getInteger(R.dimen.lim)){
         	getCurrentInputConnection().commitText("lim x->", 1);
         }
+        else if(primaryCode == 21){
+        	getCurrentInputConnection().sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN,KeyEvent.KEYCODE_DPAD_LEFT));
+        }
+        else if(primaryCode == 22){
+        	getCurrentInputConnection().sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN,KeyEvent.KEYCODE_DPAD_RIGHT));
+        }
         else {
             getCurrentInputConnection().commitText(
                     String.valueOf((char) primaryCode), 1);
         }
+
+        Keyboard currentKeyboard = mInputView.getKeyboard();
+        if(!mCapsLock){
+        	if (currentKeyboard == mSymbolsShiftedKeyboard) {
+//              mSymbolsShiftedKeyboard.setShifted(false);
+              mInputView.setKeyboard(mSymbolsKeyboard);
+              mSymbolsKeyboard.setShifted(false);
+        	}
+        	mInputView.setShifted(false);
+        }
+//        	handleShift();
 
     }
 
@@ -689,10 +708,12 @@ public class SoftKeyboard extends InputMethodService
         requestHideSelf(0);
         mInputView.closing();
     }
-
+    
+/** If double click over shift key then Caps is locked 
+*/
     private void checkToggleCapsLock() {
         long now = System.currentTimeMillis();
-        if (mLastShiftTime + 800 > now) {
+        if (mLastShiftTime + 800 > now || mCapsLock) {
             mCapsLock = !mCapsLock;
             mLastShiftTime = 0;
         } else {

@@ -53,7 +53,7 @@
     
     <Row>
         <Key android:codes="@dimen/sin" android:keyLabel="sin" android:keyWidth="12%p" 
-        	android:horizontalGap="7%p" android:keyEdgeFlags="left"/>
+            android:horizontalGap="7%p" android:keyEdgeFlags="left"/>
         <Key android:codes="@dimen/cos" android:keyLabel="cos" android:keyWidth="12%p" />
         <Key android:codes="@dimen/tan" android:keyLabel="tan" android:keyWidth="12%p" />
         <Key android:codes="@dimen/csc" android:keyLabel="csc" android:keyWidth="12%p" />
@@ -66,12 +66,20 @@
     
     <Row android:rowEdgeFlags="bottom">
         <Key android:codes="-1" android:keyIcon="@drawable/sym_keyboard_shift"
-                android:keyWidth="15%p" android:isModifier="true" android:horizontalGap="10%p"
+                android:keyWidth="15%p" android:isModifier="true" android:horizontalGap="2%p"
                 android:isSticky="true" android:keyEdgeFlags="left"/>
         <Key android:codes="-2" android:keyLabel="ABC" android:keyWidth="15%p" />
+        <Key android:codes="61" android:keyLabel="="
+        	 android:popupKeyboard="@xml/kbd_popup_template"
+        	 android:popupCharacters="≈≠"/>
         <Key android:codes="32" android:keyIcon="@drawable/sym_keyboard_space" android:keyWidth="15%p" 
                 android:isRepeatable="true"/>
-        <Key android:codes="44" android:keyLabel="," android:keyWidth="15%p" />
+        <Key android:codes="44" android:keyLabel=","
+                android:popupKeyboard="@xml/kbd_popup_template"
+                android:popupCharacters=";"/>
+        <Key android:codes="46" android:keyLabel="."
+       		 android:popupKeyboard="@xml/kbd_popup_template"
+       		 android:popupCharacters=":…"/>
         <Key android:codes="10" android:keyIcon="@drawable/sym_keyboard_return"
                 android:keyWidth="20%p" android:keyEdgeFlags="right" />
     </Row>

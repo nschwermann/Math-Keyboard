@@ -74,7 +74,7 @@
     
     <Row>
         <Key android:codes="8747" android:keyLabel="∫" 
-        	android:popupKeyboard="@xml/kbd_popup_template"
+            android:popupKeyboard="@xml/kbd_popup_template"
         	android:popupCharacters="∮"
         	android:horizontalGap="3%p" android:keyEdgeFlags="left"/>
         <Key android:codes="8721" android:keyLabel="∑" 
@@ -98,17 +98,19 @@
     <Row  android:rowEdgeFlags="bottom">
      <Key android:codes="-1" android:keyIcon="@drawable/sym_keyboard_shift"
                 android:keyWidth="15%p" android:isModifier="true"
-                android:isSticky="true" android:keyEdgeFlags="left" android:horizontalGap="10%p"/>
+                android:isSticky="true" android:keyEdgeFlags="left" android:horizontalGap="2%p"/>
         <Key android:codes="-2" android:keyLabel="ABC" android:keyWidth="15%p" />
         <Key android:codes="61" android:keyLabel="="
         	 android:popupKeyboard="@xml/kbd_popup_template"
-        	 android:popupCharacters="≈≠"
-        />
+        	 android:popupCharacters="≈≠"/>
         <Key android:codes="32" android:keyIcon="@drawable/sym_keyboard_space" android:keyWidth="15%p" 
                 android:isRepeatable="true"/>
+        <Key android:codes="44" android:keyLabel=","
+                android:popupKeyboard="@xml/kbd_popup_template"
+                android:popupCharacters=";"/>
         <Key android:codes="46" android:keyLabel="."
        		 android:popupKeyboard="@xml/kbd_popup_template"
-       		 android:popupCharacters="…"	 	 
+       		 android:popupCharacters=":…"	 	 
         />
         <Key android:codes="10" android:keyIcon="@drawable/sym_keyboard_return"
                 android:keyWidth="20%p" android:keyEdgeFlags="right"
